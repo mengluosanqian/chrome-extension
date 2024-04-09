@@ -124,3 +124,16 @@ function saveLog(inputText) {
     });
   }
 }
+
+chrome.action.onClicked.addListener(() => {
+  openWindow();
+})
+
+function openWindow() {
+  chrome.windows.create({
+    url: chrome.runtime.getURL("../html/popup.html"),
+    type: "popup",
+    height: 680,
+    width: 1280
+  })
+}
