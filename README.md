@@ -1,13 +1,24 @@
-<h1 align="center">chrome-extension-basic-demo</h1>
-<div align="center">
-一款带你十分钟入门Chrome插件开发的基础demo。
-</div>
+# extension-project
 
-## ✨ 特性
+## Project setup
+```
+yarn install
+```
 
-- 🌈 完整案例展示。
-- 🌍 中英文两种语言支持。
+### Compiles and hot-reloads for development
+```
+yarn serve
+```
 
-## 介绍文档
+### Compiles and minifies for production
+```
+yarn build
+```
 
-[文档](https://www.jianshu.com/p/9d8ddfe3403e)
+### Lints and fixes files
+```
+yarn lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
