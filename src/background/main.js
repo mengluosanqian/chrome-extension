@@ -1,8 +1,9 @@
 import hotReload from '@/utils/hotReload'
-hotReload()
-console.log('this is background')
 
-chrome.action.onClicked.addListener(() => {
+hotReload()
+console.log('this is background main.js')
+
+chrome.browserAction.onClicked.addListener(() => {
     console.log('this is background');
     openWindow();
   })

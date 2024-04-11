@@ -1,12 +1,11 @@
 {
 	"manifest_version": 2,
-	"name": "test",
-	"description": "Vue3的Chrome插件",
+	"name": "my-vue3-plugin",
+	"description": "基于vue3.x版本的chrome插件",
 	"version": "1.0.0",
 	"browser_action": {
-		"default_title": "plugin-base-vue3",
-		"default_icon": "assets/images/icon48.png",
-		"default_popup": "popup.html"
+		"default_title": "my-vue3-plugin",
+		"default_icon": "assets/images/icon48.png"
 	},
 	"permissions": [],
 	"background": {
@@ -20,7 +19,7 @@
 	"content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
 	"content_scripts": [
 		{
-			"matches": ["http://*/*", "https://*/*"],
+			"matches": ["https://*.taobao.com/*"],
 			"css": ["css/content.css"],
 			"js": ["js/chunk-vendors.js", "js/content.js"],
 			"run_at": "document_idle"

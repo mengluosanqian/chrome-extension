@@ -1,19 +1,23 @@
 <template>
-  <div class="wrapper">
-    <el-button type="danger" @click="test">测试按钮</el-button>
-  </div>
+	<div class="popup_page">
+		this is popup page
+		<div class="popup_page_main">
+			this is popup page main
+		</div>
+	</div>
 </template>
-<script setup>
-const test = () => {
-  chrome.tabs.getSelected(null, function(tab){
-  chrome.tabs.sendRequest(tab.id, { popAction: "Test"});
-  });
-}
+
+<script>
+	export default {
+
+	}
 </script>
-<style scoped>
-.wrapper{
-  width: 100px;
-  height: 100px;
-  background-color: aquamarine;
-}
+
+<style lang="less" scoped>
+	.popup_page{
+		color: red;
+		.popup_page_main{
+			color: green;
+		}
+	}
 </style>
