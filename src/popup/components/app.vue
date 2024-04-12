@@ -1,15 +1,15 @@
 <template>
-	<div class="popup_page">
-		this is popup page
-		<div class="popup_page_main">
-			this is popup page main
-		</div>
-	</div>
+	<el-button @click="changeRouter">切换路由</el-button>
+	<router-view></router-view>
 </template>
 
 <script>
 	export default {
-
+		methods: {
+			changeRouter() {
+				this.$router.replace('/')
+			}
+		}
 	}
 </script>
 
