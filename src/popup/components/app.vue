@@ -7,7 +7,7 @@
 	export default {
 		methods: {
 			changeRouter() {
-				this.$router.replace('/')
+				this.$router.replace('/userAndPass')
 			}
 		}
 	}
