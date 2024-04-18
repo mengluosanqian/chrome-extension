@@ -1,13 +1,20 @@
-const dbName = 'MyDatabase';
-const storeName = 'MyStore';
-const version = 1;
+const defaultDbName = 'MyDatabase';
+const storeName = 'UserAndPass';
+const version = 3;
  
 let db;
  
-const openDB = async () => {
+/**
+ * 打开数据库
+ * dbName 数据库名称
+ * storeValue 表名称
+ */
+const openDB = async (dbName, storeValue) => {
   return new Promise((resolve, reject) => {
-    const request = window.indexedDB.open(dbName, version);
- 
+    const dbValue = dbName || defaultDbName;
+    const request = window.indexedDB.open(dbValue, version);
+    const realStore = storeValue || storeName;
+
     request.onerror = (event) => {
       console.error('Database error: ', event.target.errorCode);
       reject(event.target.errorCode);
@@ -20,24 +27,37 @@ const openDB = async () => {
  
     request.onupgradeneeded = (event) => {
       const db = event.target.result;
-      if (!db.objectStoreNames.contains(storeName)) {
-        db.createObjectStore(storeName, { autoIncrement: true });
+      if (!db.objectStoreNames.contains(realStore)) {
+        db.createObjectStore(realStore, { autoIncrement: true });
       }
     };
   });
 };
  
-const addData = async (data) => {
-  await openDB();
-  const transaction = db.transaction(storeName, 'readwrite');
-  const store = transaction.objectStore(storeName);
+/**
+ * 添加数据
+ * data 添加的数据
+ * dbName 数据库名称
+ * storeValue 表名称
+ */
+const addData = async (data, dbName, storeValue) => {
+  await openDB(dbName, storeValue);
+  const realStore = storeValue || storeName;
+  const transaction = db.transaction(realStore, 'readwrite');
+  const store = transaction.objectStore(realStore);
   store.add(data);
 };
  
-const getAllData = async () => {
-  await openDB();
-  const transaction = db.transaction(storeName, 'readonly');
-  const store = transaction.objectStore(storeName);
+/**
+ * 查询数据
+ * dbName 数据库名称
+ * storeValue 表名称
+ */
+const getAllData = async (dbName, storeValue) => {
+  await openDB(dbName, storeValue);
+  const realStore = storeValue || storeName;
+  const transaction = db.transaction(realStore, 'readonly');
+  const store = transaction.objectStore(realStore);
   return new Promise((resolve, reject) => {
     const dataRequest = store.getAll();
     dataRequest.onsuccess = function (event) {

@@ -9,9 +9,9 @@
 <script setup>
 import indexedDB from '../../utils/indexedDB';
 async function addItem() {
-  const item = { key: 'value' };
+  const item = { user: 'admin', pass: 'admin' };
   try {
-    await indexedDB.addData(item);
+    await indexedDB.addData(item, 'User', 'userAndPass');
     console.log('Item added successfully');
   } catch (error) {
     console.error('Error adding item:', error);
@@ -19,7 +19,7 @@ async function addItem() {
 }
 async function getItems() {
   try {
-    const items = await indexedDB.getAllData();
+    const items = await indexedDB.getAllData('User', 'userAndPass');
     console.log('Items:', items);
   } catch (error) {
     console.error('Error getting items:', error);
