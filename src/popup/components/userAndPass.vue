@@ -1,6 +1,6 @@
 <template>
   <div>
-    测试indexedDB
+    测试userAndPass
     <el-button type="primary" @click="addItem">Add Item</el-button>
     <el-button type="primary" @click="getItems">Get Items</el-button>
   </div>
