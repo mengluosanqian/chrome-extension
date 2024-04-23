@@ -1,6 +1,6 @@
 const defaultDbName = 'MyDatabase';
 const storeName = 'UserAndPass';
-const version = 4;
+const version = 5;
  
 let db;
  

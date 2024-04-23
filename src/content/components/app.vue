@@ -4,7 +4,6 @@
 
 <script setup>
 document.addEventListener('click', function (event) {
-	debugger;
 	// 获取点击的元素
 	let targetElement = event.target;
 	// 使用xpath获取元素的路径

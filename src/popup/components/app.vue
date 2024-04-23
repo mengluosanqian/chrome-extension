@@ -11,6 +11,11 @@
 
 <script>
 export default {
+	data() {
+		return {
+			activeIndex: '1'
+		}
+	},
 	methods: {
 		changeUserRouter() {
 			this.$router.replace('/base/userAndPass')
