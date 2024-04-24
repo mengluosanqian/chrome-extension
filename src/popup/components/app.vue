@@ -16,6 +16,9 @@ export default {
 			activeIndex: '1'
 		}
 	},
+	created() {
+		this.changeUserRouter();
+	},
 	methods: {
 		changeUserRouter() {
 			this.$router.replace('/base/userAndPass')

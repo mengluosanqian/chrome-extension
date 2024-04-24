@@ -47,7 +47,21 @@ const addData = async (data, dbName, storeValue) => {
   const store = transaction.objectStore(realStore);
   store.add(data);
 };
- 
+
+/**
+ * 删除数据
+ * data 删除的数据key
+ * dbName 数据库名称
+ * storeValue 表名称
+ */
+const delData = async (data, dbName, storeValue) => {
+  await openDB(dbName, storeValue);
+  const realStore = storeValue || storeName;
+  const transaction = db.transaction(realStore, 'readwrite');
+  const store = transaction.objectStore(realStore);
+  store.delete(data);
+};
+
 /**
  * 查询数据
  * dbName 数据库名称
@@ -72,5 +86,6 @@ const getAllData = async (dbName, storeValue) => {
 export default {
   openDB,
   addData,
+  delData,
   getAllData,
 };
