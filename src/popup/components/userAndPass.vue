@@ -2,13 +2,14 @@
   <div>
     <el-button @click="visible = true">添加</el-button>
     <el-table :data="userTable.data" stripe style="width: 100%">
+      <el-table-column prop="id" label="账号" />
       <el-table-column prop="user" label="账号" />
       <el-table-column prop="userXpath" label="账号xpath" />
       <el-table-column prop="password" label="密码" />
       <el-table-column prop="passwordXpath" label="密码xpath" />
       <el-table-column fixed="right" label="Operations" width="120">
         <template #default="scope">
-          <el-button link type="primary" size="small" @click="deleteValue(scope)">
+          <el-button link type="primary" size="small" @click="deleteValue(scope.row)">
             删除
           </el-button>
           <el-button link type="primary" size="small" @click="editValue(scope.row)">编辑</el-button>
@@ -43,6 +44,7 @@
         <div class="dialog-footer">
           <el-button @click="visible = false">关闭</el-button>
           <el-button type="primary" @click="addValue">添加</el-button>
+          <el-button type="primary" @click="editValue1">编辑</el-button>
         </div>
       </template>
     </el-dialog>
@@ -73,11 +75,29 @@ function checkPassXpath() {
 function addValue() {
   addItem();
 }
+async function editValue1() {
+  debugger;
+  const item = {
+    id: form.id,
+    user: form.user,
+    userXpath: form.userXpath,
+    password: form.password,
+    passwordXpath: form.passwordXpath,
+  };
+  try {
+    await indexedDB.editData(item, "User", "xpathValue");
+    console.log("Item edit successfully");
+    visible.value = false;
+    getItems();
+  } catch (error) {
+    console.error("Error adding item:", error);
+  }
+}
 async function deleteValue(item) {
   console.log(item);
-  // await indexedDB.delData(item.id, "User", "xpathValue");
-  // console.log("Item deled successfully");
-  // getItems();
+  await indexedDB.delData(item.id, "User", "xpathValue");
+  console.log("Item deled successfully");
+  getItems();
 }
 function editValue(item) {
   console.log(item);
@@ -87,6 +107,7 @@ function editValue(item) {
   form.userXpath = item.userXpath;
   form.password = item.password;
   form.passwordXpath = item.passwordXpath;
+  // await indexedDB.editData(item, "User", "xpathValue")
 }
 async function getItems() {
   try {

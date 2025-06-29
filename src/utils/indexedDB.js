@@ -28,7 +28,7 @@ const openDB = async (dbName, storeValue) => {
     request.onupgradeneeded = (event) => {
       const db = event.target.result;
       if (!db.objectStoreNames.contains(realStore)) {
-        db.createObjectStore(realStore, { autoIncrement: true });
+        db.createObjectStore(realStore, { keyPath: 'id', autoIncrement: true });
       }
     };
   });
@@ -46,6 +46,20 @@ const addData = async (data, dbName, storeValue) => {
   const transaction = db.transaction(realStore, 'readwrite');
   const store = transaction.objectStore(realStore);
   store.add(data);
+};
+
+/**
+ * 编辑数据
+ * data 添加的数据
+ * dbName 数据库名称
+ * storeValue 表名称
+ */
+const editData = async (data, dbName, storeValue) => {
+  await openDB(dbName, storeValue);
+  const realStore = storeValue || storeName;
+  const transaction = db.transaction(realStore, 'readwrite');
+  const store = transaction.objectStore(realStore);
+  store.put(data);
 };
 
 /**
@@ -88,4 +102,5 @@ export default {
   addData,
   delData,
   getAllData,
+  editData,
 };
