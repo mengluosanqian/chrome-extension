@@ -54,8 +54,12 @@
 <script setup>
 import { ref, reactive, onMounted } from "vue";
 import indexedDB from "../../utils/indexedDB";
+import '../style/reset.less';
 let visible = ref(false);
 onMounted(getItems());
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    console.log('内容脚本收到消息:', message, sender, sendResponse);
+});
 const form = reactive({
   id: "",
   user: "",
@@ -76,7 +80,6 @@ function addValue() {
   addItem();
 }
 async function editValue1() {
-  debugger;
   const item = {
     id: form.id,
     user: form.user,

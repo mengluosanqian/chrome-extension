@@ -9,6 +9,9 @@ document.addEventListener('click', function (event) {
 	// 使用xpath获取元素的路径
 	let xpath = getXPath(targetElement);
 	console.log(xpath, 'xpath');
+	chrome.runtime.sendMessage({ type: 'xpath', xpath });
+	chrome.runtime.sendMessage({ action: 'CAPTURE_SCREEN' });
+	// 获取当前窗口 -> 回调函数包括当前窗口的详细信息，如窗口id等
 })
 
 // 获取元素的路径
@@ -40,7 +43,7 @@ function getElementIndex(element) {
 </script>
 
 <style scoped>
-.head{
+.head {
 	color: red;
 	position: fixed;
 	z-index: 100001;

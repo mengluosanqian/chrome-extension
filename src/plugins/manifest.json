@@ -7,6 +7,9 @@
 		"default_title": "my-vue3-plugin",
 		"default_icon": "assets/images/icon48.png"
 	},
+	"host_permissions": [
+		"<all_urls>"
+	],
 	"permissions": [
 		"tabs",
 		"unlimitedStorage",
